@@ -1,5 +1,10 @@
-﻿namespace Website_Shop.Models
+﻿using System.Collections.Generic;
+
+namespace Website_Shop.Models
 {
+    /// <summary>
+    /// Профиль
+    /// </summary>
     public class Profile
     {
         /// <summary>
@@ -31,5 +36,20 @@
         /// Ссылка на тип пользователя
         /// </summary>
         public UserType UserType { get; set; }
+
+        /// <summary>
+        /// Идентификатор корзины
+        /// </summary>
+        public int BasketId { get; set; }
+
+        /// <summary>
+        /// Ссылка на корзину
+        /// </summary>
+        public Basket Basket { get; set; }
+
+        /// <summary>
+        /// Коллекция заказов
+        /// </summary>
+        public List<Order> Orders { get; set; }
     }
 }
