@@ -2,6 +2,9 @@
 
 namespace Website_Shop.Models
 {
+    /// <summary>
+    /// Тип пользователя
+    /// </summary>
     public class UserType
     {
         /// <summary>
