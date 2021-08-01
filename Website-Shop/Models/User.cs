@@ -1,5 +1,8 @@
 ﻿namespace Website_Shop.Models
 {
+    /// <summary>
+    /// Пользователь
+    /// </summary>
     public class User
     {
         /// <summary>
