@@ -23,6 +23,26 @@ namespace Website_Shop.Models
         public string Description { get; set; }
 
         /// <summary>
+        /// Идентификатор категории
+        /// </summary>
+        public int CategoryId { get; set; }
+
+        /// <summary>
+        /// Ссылка на категорию
+        /// </summary>
+        public Category Category { get; set; }
+
+        /// <summary>
+        /// Идентификатор производителя
+        /// </summary>
+        public int ManufacturerId { get; set; }
+
+        /// <summary>
+        /// Ссылка на производителя
+        /// </summary>
+        public Manufacturer Manufacturer { get; set; }
+
+        /// <summary>
         /// Коллекция элементов корзины
         /// </summary>
         public List<BasketItem> BasketItems { get; set; }
