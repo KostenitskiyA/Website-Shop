@@ -242,7 +242,7 @@ namespace Website_Shop.Models
                 Id = 1,
                 Count = 1,
                 OrderId = 1,
-                ProductId = 1                
+                ProductId = 1
             };
             var orderItem2 = new OrderItem()
             {
@@ -258,11 +258,11 @@ namespace Website_Shop.Models
                 OrderId = 1,
                 ProductId = 7
             };
-            var orderItems = new List<BasketItem>()
+            var orderItems = new List<OrderItem>()
             {
-                basketItem1,
-                basketItem2,
-                basketItem3
+                orderItem1,
+                orderItem2,
+                orderItem3
             };
 
             modelBuilder.Entity<UserType>()
@@ -292,12 +292,12 @@ namespace Website_Shop.Models
             /// Связь One-to-One
             modelBuilder.Entity<User>()
                 .HasOne(u => u.Profile)
-                .WithOne(u => u.User)
+                .WithOne(p => p.User)
                 .HasForeignKey<Profile>(p => p.UserId);
 
             /// Связь One-to-Many
             modelBuilder.Entity<Profile>()
-                .HasOne(u => u.UserType)
+                .HasOne(p => p.UserType)
                 .WithMany(u => u.Profiles)
                 .HasForeignKey(p => p.UserTypeId);
 
@@ -324,6 +324,18 @@ namespace Website_Shop.Models
                 .HasOne(o => o.Order)
                 .WithMany(o => o.Items)
                 .HasForeignKey(i => i.OrderId);
+
+            /// Связь One-to-Many
+            modelBuilder.Entity<BasketItem>()
+                .HasOne(b => b.Product)
+                .WithMany(p => p.BasketItems)
+                .HasForeignKey(b => b.ProductId);
+
+            /// Связь One-to-Many
+            modelBuilder.Entity<OrderItem>()
+                .HasOne(o => o.Product)
+                .WithMany(p => p.OrderItems)
+                .HasForeignKey(o => o.ProductId);
         }
     }
 }
