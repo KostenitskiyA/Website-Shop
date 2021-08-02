@@ -1,4 +1,6 @@
-﻿namespace Website_Shop.Models
+﻿using System.Collections.Generic;
+
+namespace Website_Shop.Models
 {
     /// <summary>
     /// Продукт
@@ -19,5 +21,15 @@
         /// Описание продукта
         /// </summary>
         public string Description { get; set; }
+
+        /// <summary>
+        /// Коллекция элементов корзины
+        /// </summary>
+        public List<BasketItem> BasketItems { get; set; }
+
+        /// <summary>
+        /// Коллекция элементов заказов
+        /// </summary>
+        public List<OrderItem> OrderItems { get; set; }
     }
 }
