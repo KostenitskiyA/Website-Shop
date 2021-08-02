@@ -21,6 +21,10 @@ namespace Website_Shop.Models
 
         public DbSet<Product> Products { get; set; }
 
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<Manufacturer> Manufacturers { get; set; }
+
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)
         {
@@ -108,53 +112,101 @@ namespace Website_Shop.Models
                 userType3
             };
 
+            var category1 = new Category()
+            {
+                Id = 1,
+                Name = "Смартфоны"
+            };
+            var category2 = new Category()
+            {
+                Id = 2,
+                Name = "Планшеты"
+            };
+            var categories = new List<Category>()
+            {
+                category1,
+                category2
+            };
+
+            var manufacturer1 = new Manufacturer()
+            {
+                Id = 1,
+                Name = "Apple"
+            }; 
+            var manufacturer2 = new Manufacturer()
+            {
+                Id = 2,
+                Name = "Samsung"
+            };
+            var manufacturers = new List<Manufacturer>() 
+            {
+                manufacturer1,
+                manufacturer2
+            };
+
             var product1 = new Product()
             {
                 Id = 1,
                 Name = "IPhone 11 64Gb",
-                Description = "Классный телефон"
+                Description = "Классный телефон",
+                CategoryId = 1,
+                ManufacturerId = 1
             };
             var product2 = new Product()
             {
                 Id = 2,
                 Name = "IPhone 11 128Gb",
-                Description = "Классный телефон"
+                Description = "Классный телефон",
+                CategoryId = 1,
+                ManufacturerId = 1
             };
             var product3 = new Product()
             {
                 Id = 3,
                 Name = "IPhone 11 256Gb",
-                Description = "Классный телефон"
+                Description = "Классный телефон",
+                CategoryId = 1,
+                ManufacturerId = 1
             };
             var product4 = new Product()
             {
                 Id = 4,
                 Name = "IPhone 12 64Gb",
-                Description = "Классный телефон"
+                Description = "Классный телефон",
+                CategoryId = 1,
+                ManufacturerId = 1
             };
             var product5 = new Product()
             {
                 Id = 5,
                 Name = "IPhone 12 128Gb",
-                Description = "Классный телефон"
+                Description = "Классный телефон",
+                CategoryId = 1,
+                ManufacturerId = 1
             };
             var product6 = new Product()
             {
                 Id = 6,
                 Name = "IPhone 12 256Gb",
-                Description = "Классный телефон"
+                Description = "Классный телефон",
+                CategoryId = 1,
+                ManufacturerId = 1
             };
             var product7 = new Product()
             {
                 Id = 7,
                 Name = "IPhone X 64Gb",
-                Description = "Классный телефон"
+                Description = "Классный телефон",
+                CategoryId = 1,
+                ManufacturerId = 1
             };
             var product8 = new Product()
             {
                 Id = 8,
                 Name = "IPhone X 128Gb",
-                Description = "Классный телефон"
+                Description = "Классный телефон",
+                CategoryId = 1,
+                ManufacturerId = 1
             };
             var products = new List<Product>()
             {
@@ -274,6 +326,12 @@ namespace Website_Shop.Models
             modelBuilder.Entity<Profile>()
                 .HasData(profiles);
 
+            modelBuilder.Entity<Category>()
+                .HasData(categories);
+
+            modelBuilder.Entity<Manufacturer>()
+                .HasData(manufacturers);
+
             modelBuilder.Entity<Product>()
                 .HasData(products);
 
@@ -336,6 +394,18 @@ namespace Website_Shop.Models
                 .HasOne(o => o.Product)
                 .WithMany(p => p.OrderItems)
                 .HasForeignKey(o => o.ProductId);
+
+            /// Связь One-to-Many
+            modelBuilder.Entity<Product>()
+                .HasOne(p => p.Category)
+                .WithMany(c => c.Products)
+                .HasForeignKey(p => p.CategoryId);
+
+            /// Связь One-to-Many
+            modelBuilder.Entity<Product>()
+                .HasOne(p => p.Manufacturer)
+                .WithMany(m => m.Products)
+                .HasForeignKey(p => p.ManufacturerId);
         }
     }
 }
