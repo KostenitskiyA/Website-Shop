@@ -3,17 +3,17 @@
 namespace Website_Shop.Models
 {
     /// <summary>
-    /// Тип пользователя
+    /// Роль пользователя
     /// </summary>
-    public class UserType
+    public class UserRole
     {
         /// <summary>
-        /// Идентификатор типа
+        /// Идентификатор роли пользователя
         /// </summary>
         public int Id { get; set; }
 
         /// <summary>
-        /// Имя типа
+        /// Имя роли
         /// </summary>
         public string Name { get; set; }
 

@@ -9,7 +9,7 @@ namespace Website_Shop.Models
 
         public DbSet<User> Users { get; set; }
 
-        public DbSet<UserType> UserTypes { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
 
         public DbSet<Basket> Baskets { get; set; }
 
@@ -39,7 +39,7 @@ namespace Website_Shop.Models
                 Id = 1,
                 Name = "Вадим Чуйка",
                 UserId = 1,
-                UserTypeId = 1,
+                UserRoleId = 1,
                 BasketId = 1
             };
             var profile2 = new Profile()
@@ -47,7 +47,7 @@ namespace Website_Shop.Models
                 Id = 2,
                 Name = "Александр Кашкай",
                 UserId = 2,
-                UserTypeId = 2,
+                UserRoleId = 2,
                 BasketId = 2
             };
             var profile3 = new Profile()
@@ -55,7 +55,7 @@ namespace Website_Shop.Models
                 Id = 3,
                 Name = "Влад Валакас",
                 UserId = 3,
-                UserTypeId = 3,
+                UserRoleId = 3,
                 BasketId = 3
             };
             var profiles = new List<Profile>()
@@ -90,26 +90,26 @@ namespace Website_Shop.Models
                 user3
             };
 
-            var userType1 = new UserType()
+            var userRole1 = new UserRole()
             {
                 Id = 1,
                 Name = "Администратор"
             };
-            var userType2 = new UserType()
+            var userRole2 = new UserRole()
             {
                 Id = 2,
                 Name = "Продавец"
             };
-            var userType3 = new UserType()
+            var userRole3 = new UserRole()
             {
                 Id = 3,
                 Name = "Покупатель"
             };
-            var userTypes = new List<UserType>()
+            var userRoles = new List<UserRole>()
             {
-                userType1,
-                userType2,
-                userType3
+                userRole1,
+                userRole2,
+                userRole3
             };
 
             var category1 = new Category()
@@ -317,8 +317,8 @@ namespace Website_Shop.Models
                 orderItem3
             };
 
-            modelBuilder.Entity<UserType>()
-                .HasData(userTypes);
+            modelBuilder.Entity<UserRole>()
+                .HasData(userRoles);
 
             modelBuilder.Entity<User>()
                 .HasData(users);
@@ -355,9 +355,9 @@ namespace Website_Shop.Models
 
             /// Связь One-to-Many
             modelBuilder.Entity<Profile>()
-                .HasOne(p => p.UserType)
+                .HasOne(p => p.UserRole)
                 .WithMany(u => u.Profiles)
-                .HasForeignKey(p => p.UserTypeId);
+                .HasForeignKey(p => p.UserRoleId);
 
             /// Связь One-to-One
             modelBuilder.Entity<Basket>()

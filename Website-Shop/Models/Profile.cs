@@ -28,14 +28,14 @@ namespace Website_Shop.Models
         public User User { get; set; }
 
         /// <summary>
-        /// Идентификатор типа пользователя
+        /// Идентификатор роли пользователя
         /// </summary>
-        public int UserTypeId { get; set; }
+        public int UserRoleId { get; set; }
 
         /// <summary>
-        /// Ссылка на тип пользователя
+        /// Ссылка на роль пользователя
         /// </summary>
-        public UserType UserType { get; set; }
+        public UserRole UserRole { get; set; }
 
         /// <summary>
         /// Идентификатор корзины
