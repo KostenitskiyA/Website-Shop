@@ -1,25 +1,25 @@
 ﻿using System.Collections.Generic;
 
-namespace Website_Shop.Models
+namespace Website_Shop.Models.Entities
 {
     /// <summary>
-    /// Производитель
+    /// Категория
     /// </summary>
-    public class Manufacturer
+    public class Category
     {
         /// <summary>
-        /// Идентификатор производителя
+        /// Идентификатор категории
         /// </summary>
         public int Id { get; set; }
 
         /// <summary>
-        /// Наименование производителя
+        /// Наименование категории
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
         /// Коллекция продуктов
         /// </summary>
-        public List<Product> Products { get; set; }
+        public List<Product> Products { get; set; } 
     }
 }

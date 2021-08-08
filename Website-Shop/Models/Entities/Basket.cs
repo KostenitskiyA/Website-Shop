@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Website_Shop.Models
+namespace Website_Shop.Models.Entities
 {
     /// <summary>
     /// Корзина
@@ -13,9 +13,14 @@ namespace Website_Shop.Models
         public int Id { get; set; }
 
         /// <summary>
-        /// Ссылка на профиль
+        /// Идентификатор пользователя
         /// </summary>
-        public Profile Profile { get; set; }
+        public int UserId { get; set; }
+
+        /// <summary>
+        /// Ссылка на пользователя
+        /// </summary>
+        public User User { get; set; }
 
         /// <summary>
         /// Коллекция продуктов

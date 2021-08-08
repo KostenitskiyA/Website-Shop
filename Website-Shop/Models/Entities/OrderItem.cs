@@ -1,4 +1,4 @@
-﻿namespace Website_Shop.Models
+﻿namespace Website_Shop.Models.Entities
 {
     /// <summary>
     /// Элемент заказа
