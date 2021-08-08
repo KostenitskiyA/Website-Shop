@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Website_Shop.Models
+namespace Website_Shop.Models.Entities
 {
     /// <summary>
     /// Продукт

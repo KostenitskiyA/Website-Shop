@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Website_Shop.Models.Entities;
 
 namespace Website_Shop.Models
 {
     public class ApplicationContext : DbContext
     {
-        public DbSet<Profile> Profiles { get; set; }
-
         public DbSet<User> Users { get; set; }
 
-        public DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<Authorization> Authorizations { get; set; }
+
+        public DbSet<Profile> Profiles { get; set; }
 
         public DbSet<Basket> Baskets { get; set; }
 
@@ -34,29 +35,51 @@ namespace Website_Shop.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            var authorization1 = new Authorization()
+            {
+                Id = 1,
+                Login = "Vadim",
+                Password = "Alladin",
+                UserId = 1
+            };
+            var authorization2 = new Authorization()
+            {
+                Id = 2,
+                Login = "Vlad",
+                Password = "Simpotyaga",
+                UserId = 2
+            };
+            var authorization3 = new Authorization()
+            {
+                Id = 3,
+                Login = "Alex",
+                Password = "Brodyaga",
+                UserId = 3
+            };
+            var authentications = new List<Authorization>()
+            {
+                authorization1,
+                authorization2,
+                authorization3
+            };
+
             var profile1 = new Profile()
             {
                 Id = 1,
                 Name = "Вадим Чуйка",
-                UserId = 1,
-                UserRoleId = 1,
-                BasketId = 1
+                UserId = 1
             };
             var profile2 = new Profile()
             {
                 Id = 2,
-                Name = "Александр Кашкай",
-                UserId = 2,
-                UserRoleId = 2,
-                BasketId = 2
+                Name = "Влад Валакас",
+                UserId = 2
             };
             var profile3 = new Profile()
             {
                 Id = 3,
-                Name = "Влад Валакас",
-                UserId = 3,
-                UserRoleId = 3,
-                BasketId = 3
+                Name = "Александр Кашкай",
+                UserId = 3
             };
             var profiles = new List<Profile>()
             {
@@ -67,49 +90,21 @@ namespace Website_Shop.Models
 
             var user1 = new User()
             {
-                Id = 1,
-                Login = "Vadim",
-                Password = "Alladin"
+                Id = 1
             };
             var user2 = new User()
             {
-                Id = 2,
-                Login = "Sasha",
-                Password = "Natasha"
+                Id = 2
             };
             var user3 = new User()
             {
-                Id = 3,
-                Login = "Vlad",
-                Password = "Borad"
+                Id = 3
             };
             var users = new List<User>()
             {
                 user1,
                 user2,
                 user3
-            };
-
-            var userRole1 = new UserRole()
-            {
-                Id = 1,
-                Name = "Администратор"
-            };
-            var userRole2 = new UserRole()
-            {
-                Id = 2,
-                Name = "Продавец"
-            };
-            var userRole3 = new UserRole()
-            {
-                Id = 3,
-                Name = "Покупатель"
-            };
-            var userRoles = new List<UserRole>()
-            {
-                userRole1,
-                userRole2,
-                userRole3
             };
 
             var category1 = new Category()
@@ -222,15 +217,18 @@ namespace Website_Shop.Models
 
             var basket1 = new Basket()
             {
-                Id = 1
+                Id = 1,
+                UserId = 1
             };
             var basket2 = new Basket()
             {
-                Id = 2
+                Id = 2,
+                UserId = 2
             };
             var basket3 = new Basket()
             {
-                Id = 3
+                Id = 3,
+                UserId = 3
             };
             var baskets = new List<Basket>()
             {
@@ -270,17 +268,17 @@ namespace Website_Shop.Models
             var order1 = new Order()
             {
                 Id = 1,
-                ProfileId = 1
+                UserId = 1
             };
             var order2 = new Order()
             {
                 Id = 2,
-                ProfileId = 1
+                UserId = 1
             };
             var order3 = new Order()
             {
                 Id = 3,
-                ProfileId = 2
+                UserId = 2
             };
             var orders = new List<Order>()
             {
@@ -317,23 +315,14 @@ namespace Website_Shop.Models
                 orderItem3
             };
 
-            modelBuilder.Entity<UserRole>()
-                .HasData(userRoles);
-
-            modelBuilder.Entity<User>()
-                .HasData(users);
+            modelBuilder.Entity<Authorization>()
+                .HasData(authentications);
 
             modelBuilder.Entity<Profile>()
                 .HasData(profiles);
 
-            modelBuilder.Entity<Category>()
-                .HasData(categories);
-
-            modelBuilder.Entity<Manufacturer>()
-                .HasData(manufacturers);
-
-            modelBuilder.Entity<Product>()
-                .HasData(products);
+            modelBuilder.Entity<User>()
+                .HasData(users);
 
             modelBuilder.Entity<BasketItem>()
                 .HasData(basketItems);
@@ -347,29 +336,38 @@ namespace Website_Shop.Models
             modelBuilder.Entity<Order>()
                 .HasData(orders);
 
+            modelBuilder.Entity<Product>()
+                .HasData(products);
+
+            modelBuilder.Entity<Category>()
+                .HasData(categories);
+
+            modelBuilder.Entity<Manufacturer>()
+                .HasData(manufacturers);
+
+            /// Связь One-to-One
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Authorization)
+                .WithOne(a => a.User)
+                .HasForeignKey<Authorization>(a => a.UserId);
+
             /// Связь One-to-One
             modelBuilder.Entity<User>()
                 .HasOne(u => u.Profile)
                 .WithOne(p => p.User)
                 .HasForeignKey<Profile>(p => p.UserId);
 
-            /// Связь One-to-Many
-            modelBuilder.Entity<Profile>()
-                .HasOne(p => p.UserRole)
-                .WithMany(u => u.Profiles)
-                .HasForeignKey(p => p.UserRoleId);
-
             /// Связь One-to-One
-            modelBuilder.Entity<Basket>()
-                .HasOne(b => b.Profile)
-                .WithOne(p => p.Basket)
-                .HasForeignKey<Profile>(p => p.BasketId);
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Basket)
+                .WithOne(b => b.User)
+                .HasForeignKey<Basket>(b => b.UserId);
 
             /// Связь One-to-Many
             modelBuilder.Entity<Order>()
-                .HasOne(o => o.Profile)
-                .WithMany(p => p.Orders)
-                .HasForeignKey(o => o.ProfileId);
+                .HasOne(o => o.User)
+                .WithMany(u => u.Orders)
+                .HasForeignKey(o => o.UserId);
 
             /// Связь One-to-Many
             modelBuilder.Entity<BasketItem>()
