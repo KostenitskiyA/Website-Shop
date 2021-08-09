@@ -38,6 +38,9 @@ namespace Website_Shop.Models.Entities
         public List<Order> Orders { get; set; }
     }
 
+    /// <summary>
+    /// Роли пользователя
+    /// </summary>
     public enum Roles
     {
         Покупатель,
