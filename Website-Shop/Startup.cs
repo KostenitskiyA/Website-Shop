@@ -1,10 +1,13 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Website_Shop.Interfaces;
 using Website_Shop.Models;
+using Website_Shop.Services;
 
 namespace Website_Shop
 {
@@ -23,6 +26,8 @@ namespace Website_Shop
 
             services.AddDbContext<ApplicationContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultDatabase")));
+
+            services.AddTransient<IAuthorization, Authorization>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
