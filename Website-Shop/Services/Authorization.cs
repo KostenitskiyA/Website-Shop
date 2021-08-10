@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Website_Shop.Interfaces;
@@ -38,6 +39,9 @@ namespace Website_Shop.Services
         {
             try
             {
+                user.Basket = new Basket();
+                user.Orders = new List<Order>();
+
                 _context.Users.Add(user);
                 _context.SaveChanges();
 
