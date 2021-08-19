@@ -1,0 +1,25 @@
+﻿@model User
+
+<div style="width: 30%; margin: auto;">
+    @using (Html.BeginForm("EditUser", "User", FormMethod.Post))
+    {
+        <div>
+            @Html.LabelFor(u => u.Authorization.Login, new { @class = "form-label" })
+            @Html.TextBoxFor(u => u.Authorization.Login, new { @class = "form-control" })
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(u => u.Authorization.Password, new { @class = "form-label" })
+            @Html.TextBoxFor(u => u.Authorization.Password, new { @class = "form-control" })
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(u => u.Profile.Name, new { @class = "form-label" })
+            @Html.TextBoxFor(u => u.Profile.Name, new { @class = "form-control" })
+        </div>
+        <div class="mb-3" style="text-align: center;">
+            <input class="btn btn-primary" type="submit" value="Редактировать" />
+        </div>
+        <div style="text-align: center;">
+            @Html.ValidationSummary()
+        </div>
+    }
+</div>
