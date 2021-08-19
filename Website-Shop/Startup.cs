@@ -28,7 +28,7 @@ namespace Website_Shop
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultDatabase")));
 
             services.AddTransient<IAuthorizationProvider, AuthorizationProvider>();
-            services.AddTransient<IUserProvider, IUserProvider>();
+            services.AddTransient<IUserProvider, UserProvider>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
