@@ -1,31 +1,32 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 using Website_Shop.Interfaces;
 using Website_Shop.Models;
 using Website_Shop.Models.Entities;
 
 namespace Website_Shop.Services
 {
-    public class Authorization : IAuthorization
+    public class AuthorizationProvider : IAuthorizationProvider
     {
         private ApplicationContext _context;
 
-        public Authorization(ApplicationContext context)
+        public AuthorizationProvider(ApplicationContext context)
         {
             _context = context;
         }
 
-        public User LogIn(User user)
+        public async Task<User> LogInAsync(User user)
         {
             try
             {
-                var foundUser = _context.Users
+                var foundUser = await _context.Users
                     .Include(u => u.Authorization)
                     .Where(u => u.Authorization.Login == user.Authorization.Login
                           && u.Authorization.Password == user.Authorization.Password)
-                    .FirstOrDefault();
+                    .FirstOrDefaultAsync();
 
                 return foundUser;
             }
@@ -35,15 +36,22 @@ namespace Website_Shop.Services
             }
         }
 
-        public User SignIn(User user)
+        public async Task<User> SignInAsync(User user)
         {
             try
             {
+                var foundUser = await _context.Authorizations
+                    .Where(a => a.Login == user.Authorization.Login)
+                    .FirstOrDefaultAsync();
+
+                if (foundUser != null)
+                    throw new Exception("Пользователь с таким логином уже существует");
+
                 user.Basket = new Basket();
                 user.Orders = new List<Order>();
 
-                _context.Users.Add(user);
-                _context.SaveChanges();
+                await _context.Users.AddAsync(user);
+                await _context.SaveChangesAsync();
 
                 return user;
             }
