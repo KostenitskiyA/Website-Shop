@@ -24,6 +24,12 @@ namespace Website_Shop
         {
             services.AddControllersWithViews();
 
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Authorization/LogIn");
+                });
+
             services.AddDbContext<ApplicationContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultDatabase")));
 
