@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Website_Shop.Models.Entities
 {
@@ -25,6 +26,8 @@ namespace Website_Shop.Models.Entities
         /// <summary>
         /// Роль пользователя
         /// </summary>
+        [Display(Name = "Роль пользователя")]
+        [Required(ErrorMessage = "Не указана роль")]
         public Roles Role { get; set; }
 
         /// <summary>
