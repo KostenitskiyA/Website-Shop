@@ -14,13 +14,13 @@ namespace Website_Shop.Controllers
 {
     public class AuthorizationController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private IAuthorizationProvider _authorization;
+        private readonly ILogger<AuthorizationController> _logger;
+        private IAuthorizationProvider _authorizationService;
 
-        public AuthorizationController(ILogger<HomeController> logger, IAuthorizationProvider authorization)
+        public AuthorizationController(ILogger<AuthorizationController> logger, IAuthorizationProvider authorizationService)
         {
             _logger = logger;
-            _authorization = authorization;
+            _authorizationService = authorizationService;
         }
 
         [HttpGet]
@@ -34,7 +34,7 @@ namespace Website_Shop.Controllers
         {
             try
             {
-                var foundUser = await _authorization.LogInAsync(user);
+                var foundUser = await _authorizationService.LogInAsync(user);
 
                 if (foundUser == null)
                     throw new Exception("Пользователь не найден");
@@ -65,7 +65,7 @@ namespace Website_Shop.Controllers
         {
             try
             {
-                var createdUser = await _authorization.SignInAsync(user);
+                var createdUser = await _authorizationService.SignInAsync(user);
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                     new ClaimsPrincipal(Authorization(createdUser.Authorization.Login, createdUser.Role.ToString())));
