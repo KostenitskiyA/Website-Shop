@@ -56,7 +56,9 @@ namespace Website_Shop.Services
         {
             try
             {
-                _context.Users.Add(user);
+                _context.Users
+                    .Add(user);
+
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -69,7 +71,10 @@ namespace Website_Shop.Services
         {
             try
             {
-                _context.Entry<User>(user).State = EntityState.Modified;
+                _context.Entry(user).State = EntityState.Modified;
+                _context.Entry(user.Authorization).State = EntityState.Modified;
+                _context.Entry(user.Profile).State = EntityState.Modified;
+
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -82,9 +87,11 @@ namespace Website_Shop.Services
         {
             try
             {
-                var user = _context.Users.SingleOrDefault(u => u.Id == userId);
+                var foundUser = _context.Users
+                    .SingleOrDefault(u => u.Id == userId);
 
-                _context.Users.Remove(user);
+                _context.Users.Remove(foundUser);
+
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
