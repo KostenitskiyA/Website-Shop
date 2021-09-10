@@ -17,7 +17,7 @@ namespace Website_Shop.Interfaces
         public Task<User> GetUserAsync(int userId);
 
         /// <summary>
-        /// Получение пользователей
+        /// Получение коллекции пользователей
         /// </summary>
         /// <returns>Коллекция пользователей</returns>
         public Task<IEnumerable<User>> GetUsersAsync();
