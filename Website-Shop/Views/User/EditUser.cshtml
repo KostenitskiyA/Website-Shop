@@ -1,0 +1,39 @@
+﻿@model EditUserViewModel
+
+<div style="width: 30%; margin: auto;">
+    @using (Html.BeginForm("EditUser", "User", FormMethod.Post))
+    {
+        <div class="mb-3">
+            @Html.HiddenFor(e => e.User.Authorization.Id, new { @class = "form-label" })
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(e => e.User.Authorization.Login, new { @class = "form-label" })
+            @Html.TextBoxFor(e => e.User.Authorization.Login, new { @class = "form-control" })
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(u => u.User.Authorization.Password, new { @class = "form-label" })
+            @Html.TextBoxFor(e => e.User.Authorization.Password, new { @class = "form-control" })
+        </div>
+        <div class="mb-3">
+            @Html.HiddenFor(e => e.User.Profile.Id, new { @class = "form-label" })
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(e => e.User.Profile.Name, new { @class = "form-label" })
+            @Html.TextBoxFor(e => e.User.Profile.Name, new { @class = "form-control" })
+        </div>
+        <div class="mb-3">
+            @Html.HiddenFor(e => e.User.Id, new { @class = "form-label" })
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(e => e.User.Role, new { @class = "form-label" })
+            @Html.DropDownListFor(e => e.User.Role, new SelectList(Html.GetEnumSelectList<Roles>(), "Text", "Text"), new { @class = "form-control" })
+            
+        </div>
+        <div class="mb-3" style="text-align: center;">
+            <input class="btn btn-primary" type="submit" value="Редактировать" />
+        </div>
+        <div style="text-align: center;">
+            @Html.ValidationSummary()
+        </div>
+    }
+</div> 
