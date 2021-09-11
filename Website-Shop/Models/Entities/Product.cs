@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Website_Shop.Models.Entities
 {
@@ -13,13 +14,16 @@ namespace Website_Shop.Models.Entities
         public int Id { get; set; }
 
         /// <summary>
-        /// Название продукта
+        /// Наименование продукта
         /// </summary>
+        [Display(Name = "Наименование продукта")]
+        [Required(ErrorMessage = "Не указано наименование продукта")]
         public string Name { get; set; }
 
         /// <summary>
         /// Описание продукта
         /// </summary>
+        [Display(Name = "Описание продукта")]
         public string Description { get; set; }
 
         /// <summary>
@@ -30,6 +34,8 @@ namespace Website_Shop.Models.Entities
         /// <summary>
         /// Ссылка на категорию
         /// </summary>
+        [Display(Name = "Категория продукта")]
+        [Required(ErrorMessage = "Не указана категория продукта")]
         public Category Category { get; set; }
 
         /// <summary>
@@ -40,6 +46,8 @@ namespace Website_Shop.Models.Entities
         /// <summary>
         /// Ссылка на производителя
         /// </summary>
+        [Display(Name = "Производитель продукта")]
+        [Required(ErrorMessage = "Не указан производитель продукта")]
         public Manufacturer Manufacturer { get; set; }
 
         /// <summary>
