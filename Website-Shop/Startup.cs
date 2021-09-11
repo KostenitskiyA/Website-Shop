@@ -35,6 +35,7 @@ namespace Website_Shop
 
             services.AddTransient<IAuthorizationProvider, AuthorizationProvider>();
             services.AddTransient<IUserProvider, UserProvider>();
+            services.AddTransient<IProductProvider, ProductProvider>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
