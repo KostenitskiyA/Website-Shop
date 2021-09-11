@@ -1,0 +1,27 @@
+﻿@model ProductsViewModel
+
+<div style="width: 75%; margin: auto;">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Наименование</th>
+                <th>Категория</th>
+                <th>Производитель</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model.Products)
+            {
+                <tr>
+                    <td>@product.Id</td>
+                    <td>@product.Name</td>
+                    <td>@product.Category.Name</td>
+                    <td>@product.Manufacturer.Name</td>
+                    <td>@Html.ActionLink("Открыть", "GetProduct", "Product", new { productId = product.Id }) | @Html.ActionLink("Редактировать", "EditProduct", "Product", new { productId = product.Id }) | @Html.ActionLink("Удалить", "DeleteProduct", "Product", new { productId = product.Id })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
