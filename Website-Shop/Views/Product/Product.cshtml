@@ -1,0 +1,36 @@
+﻿@model ProductViewModel
+
+<div style="width: 30%; margin: auto;">
+    <div class="mb-3">
+        @Html.HiddenFor(p => p.Product.Id, new { @class = "form-label" })
+    </div>
+    <div class="mb-3">
+        @Html.LabelFor(p => p.Product.Name, new { @class = "form-label" })
+        @Html.TextBoxFor(p => p.Product.Name, new { @class = "form-control", @readonly = true })
+    </div>
+    <div class="mb-3">
+        @Html.LabelFor(p => p.Product.Description, new { @class = "form-label" })
+        @Html.TextBoxFor(p => p.Product.Description, new { @class = "form-control", @readonly = true })
+    </div>
+    <div class="mb-3">
+        @Html.HiddenFor(p => p.Product.CategoryId, new { @class = "form-label" })
+    </div>
+    <div class="mb-3">
+        @Html.LabelFor(p => p.Product.Category.Name, new { @class = "form-label" })
+        @Html.TextBoxFor(p => p.Product.Category.Name, new { @class = "form-control", @readonly = true })
+    </div>
+    <div class="mb-3">
+        @Html.HiddenFor(p => p.Product.ManufacturerId, new { @class = "form-label" })
+    </div>
+    <div class="mb-3">
+        @Html.LabelFor(p => p.Product.Manufacturer.Name, new { @class = "form-label" })
+        @Html.TextBoxFor(p => p.Product.Manufacturer.Name, new { @class = "form-control", @readonly = true })
+    </div>
+
+    <div class="mb-3" style="text-align: center;">
+        @using (Html.BeginForm("AddProduct", "Basket", FormMethod.Post))
+        {
+            <input class="btn btn-primary" type="submit" value="Добавить в корзину" />
+        }
+    </div>
+</div> 

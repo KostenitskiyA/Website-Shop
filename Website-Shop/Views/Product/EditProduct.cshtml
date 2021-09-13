@@ -1,0 +1,32 @@
+﻿@model EditProductViewModel
+
+<div style="width: 30%; margin: auto;">
+    @using (Html.BeginForm("EditProduct", "Product", FormMethod.Post))
+    {
+        <div class="mb-3">
+            @Html.HiddenFor(e => e.Product.Id, new { @class = "form-label" })
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(e => e.Product.Name, new { @class = "form-label" })
+            @Html.TextBoxFor(e => e.Product.Name, new { @class = "form-control" })
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(e => e.Product.Description, new { @class = "form-label" })
+            @Html.TextBoxFor(e => e.Product.Description, new { @class = "form-control" })
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(e => e.Product.Category.Name, new { @class = "form-label" })
+            @Html.DropDownListFor(e => e.Product.CategoryId, new SelectList(Model.Categories, "Id", "Name"), new { @class = "form-control" })
+        </div>
+        <div class="mb-3">
+            @Html.LabelFor(e => e.Product.Manufacturer.Name, new { @class = "form-label" })
+            @Html.DropDownListFor(e => e.Product.ManufacturerId, new SelectList(Model.Manufacturers, "Id", "Name"), new { @class = "form-control" })
+        </div>
+        <div class="mb-3" style="text-align: center;">
+            <input class="btn btn-primary" type="submit" value="Редактировать" />
+        </div>
+        <div style="text-align: center;">
+            @Html.ValidationSummary()
+        </div>
+    }
+</div>   
