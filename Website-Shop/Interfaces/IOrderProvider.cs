@@ -45,13 +45,14 @@ namespace Website_Shop.Interfaces
         /// Получение статуса заказа
         /// </summary>
         /// <param name="orderId">Идентификатор заказа</param>
-        public Task GetStatusAsync(int orderId);
+        /// <returns>Статус заказа</returns>
+        public Task<Statuses> GetStatusAsync(int orderId);
 
         /// <summary>
         /// Установка статуса заказа
         /// </summary>
         /// <param name="orderId">Идентификатор заказа</param>
         /// <param name="status">Статус</param>
-        public Task SetStatusAsync(int orderId, string status);
+        public Task SetStatusAsync(int orderId, Statuses status);
     }
 }
