@@ -19,8 +19,8 @@ namespace Website_Shop.Interfaces
         /// Добавление элемента в корзину
         /// </summary>
         /// <param name="basketId">Идентификатор корзины</param>
-        /// <param name="itemId">Идентификатор продукта</param>
-        public Task AddItemAsync(int basketId, int itemId);
+        /// <param name="productId">Идентификатор продукта</param>
+        public Task AddProductAsync(int basketId, int productId);
 
         /// <summary>
         /// Удаление элемента корзины
